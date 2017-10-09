@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>8子组件用父组件的数据</title>
+</head>
+<body>
+	<div id="box">
+		<cpt1></cpt1>
+	</div>
+	<template id="dad">
+		<h1>父组件->{{msg}}</h1>
+		<cpt2 :dad-data="msg" :n="num"></cpt2>
+	</template>
+</body>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+	window.onload = function(){
+		var vm = new Vue({
+			el:'#box',
+			components:{
+				'cpt1':{
+					data(){
+						return {
+							msg:'hjjk父组件字符串',
+							num:9999
+						}
+					},
+					template:'#dad',
+					components:{
+						'cpt2':{
+							data(){
+								return {
+									str:'子组件'
+								}
+							},
+							props:{
+								'dadData':String,
+								'n':Number
+							},
+							template:'<h2>子组件标体2->{{str}}->{{dadData}}->{{n}}</h2>'
+						}
+					}
+				}
+			}
+		});
+	}
+</script>
+</html>

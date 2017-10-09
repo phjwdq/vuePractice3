@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>1动画fade</title>
+	<style>
+		.wrap{
+			width: 200px;
+			height: 200px;
+			background-color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<button @click="toggle()">按钮</button>
+		<div class="wrap" v-show="aa"></div>
+	</div>
+</body>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+	window.onload = function(){
+		var vm = new Vue({
+			el:'#box',
+			data:{
+				aa:true
+			},
+			methods:{
+				toggle:function(){
+					this.aa = !this.aa;
+				}
+			}
+		});
+	}
+</script>
+</html>

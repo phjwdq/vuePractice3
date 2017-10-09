@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>3动画animation</title>
+	<link rel="stylesheet" href="css/animate.css">
+	<style>
+		.wrap{
+			width: 200px;
+			height: 200px;
+			margin: 0 0 0 200px;
+			background-color: red;
+		}
+		
+	</style>
+</head>
+<body>
+	<div id="box">
+		<button @click="toggle()">按钮</button>
+		<div class="wrap animated" v-show="aa" transition="bounce"></div>
+	</div>
+</body>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+	window.onload = function(){
+		var vm = new Vue({
+			el:'#box',
+			data:{
+				aa:true
+			},
+			methods:{
+				toggle:function(){
+					this.aa = !this.aa;
+				}
+			},
+			transitions:{
+				// 动画名称以及动画的json串
+				bounce:{
+					enterClass:'zoomInLeft',
+					leaveClass:'zoomOutRight'
+				}
+			}
+		});
+	}
+</script>
+</html>

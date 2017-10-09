@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>10父组件用子组件的数据</title>
+</head>
+<body>
+	<div id="box">
+		<cpt1></cpt1>
+	</div>
+
+	<template id="dad">
+		<h1>父组件->{{num}}->{{msg}}</h1>
+		<cpt2 @child-msg="get"></cpt2>
+	</template>
+
+	<template id="child">
+		<h2>子组件</h2>
+		<button @click="send">send</button>
+	</template>
+</body>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+	window.onload = function(){
+		var vm = new Vue({
+			el:'#box',
+			components:{
+				'cpt1':{
+					data(){
+						return {
+							msg:'父组件字符串',
+							num:9999
+						}
+					},
+					template:'#dad',
+					// 注意 methods中方法的写法
+					methods:{
+						get(str){
+							// alert(str);
+							this.msg = str;
+						}
+					},
+					components:{
+						'cpt2':{
+							data(){
+								return {
+									str:'子组件'
+								}
+							},
+							template:'#child',
+					// 注意 methods中方法的写法
+							methods:{
+								send(){
+									this.$emit('child-msg',this.str)
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+	}
+</script>
+</html>

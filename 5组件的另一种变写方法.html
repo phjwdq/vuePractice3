@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>5组件的另一种变写方法</title>
+</head>
+<body>
+	<div id="box">
+		<my-aaa></my-aaa>
+	</div>
+</body>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+	var vm = new Vue({
+		el:'#box',
+		components:{
+			'my-aaa':{
+				data(){
+					return {
+						msg:'必填1'
+					}
+				},
+				methods:{
+					change:function(){
+						this.msg = 'xiu该修改'
+					}
+				},
+				template:'<h1 @click="change()">标题1-》{{msg}}</h1>'
+			}
+		}
+	});
+</script>
+</html>

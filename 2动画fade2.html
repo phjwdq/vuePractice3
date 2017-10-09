@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>2动画fade2</title>
+	<!-- <link rel="stylesheet" href="css/animate.css"> -->
+	<style>
+		.wrap{
+			width: 200px;
+			height: 200px;
+			background-color: red;
+		}
+		.fade111-transition{
+			transition: 1s all ease;
+		}
+		.fade111-enter{
+			transform: rotate(30deg) scale(0.5,2);
+		}
+		.fade111-leave{
+			transform: translate(200px,100px) rotate(60deg);
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<button @click="toggle()">按钮</button>
+		<div class="wrap" v-show="aa" transition="fade111"></div>
+	</div>
+</body>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+	window.onload = function(){
+		var vm = new Vue({
+			el:'#box',
+			data:{
+				aa:true
+			},
+			methods:{
+				toggle:function(){
+					this.aa = !this.aa;
+				}
+			}
+		});
+	}
+</script>
+</html>

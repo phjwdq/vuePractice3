@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>4组件extend</title>
+</head>
+<body>
+	<div id="box">
+		<aaa></aaa>
+	</div>
+</body>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+	var vvv = Vue.extend({
+		template:'<h1 @click="change()">标题1->{{msg}}</h1>',
+		// data必须是函数
+		data(){
+			return {
+				msg:'信息新'
+			}
+		},
+		methods:{
+			change:function(){
+				this.msg = 'gengxin信息'
+			}
+		}
+	});
+
+// a与vm的对象相同
+	var a = new vvv();
+	console.log(a);
+
+	var vm = new Vue({
+		el:'#box',
+		components:{
+			'aaa':vvv
+		}
+	});
+
+	console.log(vm);
+</script>
+</html>

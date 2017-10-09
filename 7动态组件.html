@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>7动态组件</title>
+</head>
+<body>
+	<div id="box">
+		<button @click="ch='aaa'">按钮A</button>
+		<button @click="ch='bbb'">按钮B</button>
+		<component :is="ch"></component>
+	</div>
+</body>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+	var vm = new Vue({
+		el:'#box',
+		data:{
+			ch:'aaa'
+		},
+		components:{
+			'aaa':{
+				data(){
+					return {
+						msg1:'AAAA'
+					}
+				},
+				template:'<h1>标题1->{{msg1}}</h1>'
+			},
+			'bbb':{
+				data(){
+					return {
+						msg2:'BBB'
+					}
+				},
+				template:'<h2>标题2->{{msg2}}</h2>'
+			}
+		}
+	});
+</script>
+</html>

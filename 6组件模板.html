@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>6组件模板</title>
+</head>
+<!-- 常用  一定要学会！！ -->
+<body>
+	<div id="box">
+		<my-aaa></my-aaa>
+	</div>
+	<template id='aaa'>
+		<h1 @click="change()">标题11->{{msg}}</h1>
+		<ul>
+			<li v-for="val in arr">
+				{{val}}
+			</li>
+		</ul>
+	</template>
+</body>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+	window.onload = function(){
+		var vm = new Vue({
+			el:'#box',
+			components:{
+				// my-aaa是自定义的标签名称
+				'my-aaa':{
+					data(){
+						return {
+							arr:['apple','orange','banana'],
+							msg:'信息'
+						}
+						
+					},
+					methods:{
+						change:function(){
+							this.msg = '修改'
+						}
+					},
+					// aaa是template的id名称
+					template:'#aaa'
+				}
+			}
+		});
+	}
+</script>
+</html>
