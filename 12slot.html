@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>12slot</title>
+</head>
+<body>
+	<div id="box">
+		<cpt>
+			<ul slot="ul">
+				<li>111</li>
+				<li>222</li>
+				<li>333</li>
+			</ul>
+			<ol slot="ol">
+				<li>第1个ol</li>
+				<li>第2个ol</li>
+				<li>第3个ol</li>
+			</ol>
+		</cpt>
+	</div>
+	<!-- slot提前占用位置 以备以后使用 -->
+	<template id="first">
+		<h1>标题1</h1>
+		<slot name='ol'>默认情况</slot>
+		<p>段落一{{str}}</p>
+		<slot name='ul'>默认情况</slot>
+	</template>
+</body>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+	window.onload = function(){
+		var vm = new Vue({
+			el:'#box',
+			components:{
+				'cpt':{
+					data:function(){
+						return {
+							str:'段落内容'
+						}
+					},
+					template:'#first'
+				}
+				
+			}
+		});
+	}
+</script>
+</html>
