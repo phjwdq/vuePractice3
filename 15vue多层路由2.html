@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>15vue多层路由</title>
+	<style>
+	/*.v-link-active是自动生成的类名*/
+		.v-link-active{
+			font-size: 20px;
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<ul>
+			<li>
+				<a v-link="{path:'/home'}">主页</a>
+			</li>
+			<li>
+				<a v-link="{path:'/news'}">新闻</a>
+			</li>
+		</ul>
+		<div>
+			<router-view></router-view>
+		</div>
+	</div>
+	<template id="home">
+		<h4>登录页面</h4>
+		<div>
+			<a v-link="{path:'/home/login/wang'}">登录</a>
+			<a v-link="{path:'/home/reg/info'}">注册</a>
+		</div>
+		<div>
+			<router-view></router-view>
+		</div>
+	</template>
+	<template id="news">
+		<h4>新闻页面</h4>
+		<div>
+			<ul>
+				<li>
+					<a v-link="{path:'/news/detail/001'}">信息网001</a>
+				</li>
+				<li>
+					<a v-link="{path:'/news/detail/002'}">xinwen0002</a>
+				</li>
+			</ul>
+		</div>
+		<div>
+			<router-view></router-view>
+		</div>
+	</template>
+	<template id="detail">
+		<strong>xixn洗呢新闻</strong>
+		{{$route.params | json}}
+		<br>
+		{{$route.path}}
+		<br>
+		{{$route.query | json}}
+	</template>
+</body>
+<!-- 注意 vue要写在最前面 -->
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript" src="js/vue-router.js"></script>
+<script type="text/javascript">
+	var App = Vue.extend();
+
+	var Home = Vue.extend({
+		template:'#home'
+	});
+	var News = Vue.extend({
+		template:'#news'
+	});
+	var Detail = Vue.extend({
+		template:'#detail'
+	});
+
+	var router = new VueRouter();
+
+// 注意 子路由在关联中写着
+	router.map({
+		'home':{
+			component:Home,
+			subRoutes:{
+				'login/:name':{
+					component:{
+						template:'<strong>登录页面登录登录</strong>'
+					}
+				},
+				'reg/:rrr':{
+					component:{
+						template:'<strong>注册信息信息</strong>'
+					}
+				}
+			}
+		},
+		'news':{
+			component:News,
+			subRoutes:{
+				'/detail/:id':{
+					component:Detail
+				}
+			}
+		}
+	});
+
+	router.start(App,'#box');
+
+	router.redirect({
+		'/':'home'
+	});
+</script>
+</html>

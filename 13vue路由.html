@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue路由</title>
+	<style>
+	/*.v-link-active是自动生成的类名*/
+		.v-link-active{
+			font-size: 20px;
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<ul>
+			<li>
+				<a v-link="{path:'/home'}">主页</a>
+			</li>
+			<li>
+				<a v-link="{path:'/news'}">新闻</a>
+			</li>
+		</ul>
+		<div>
+			<router-view></router-view>
+		</div>
+	</div>
+	
+</body>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript" src="js/vue-router.js"></script>
+<script type="text/javascript">
+	//1、根组件
+	var App = Vue.extend();
+	// 2、导航组件
+	var Home = Vue.extend({
+		template:'<h1>这是主页</h1>'
+	});
+	var News = Vue.extend({
+		template:'<h1>这是新闻也</h1>'
+	});
+	// 3、router
+	var router = new VueRouter();
+	// 4、关联组件和路由
+	router.map({
+		'home':{//home是路径 Home是组件
+			component:Home
+		},
+		'news':{
+			component:News
+		}
+	});
+	// 5、开启路由
+	router.start(App,'#box');
+	// 6、跳转页面
+	router.redirect({
+		'/':'home'
+	});
+</script>
+</html>

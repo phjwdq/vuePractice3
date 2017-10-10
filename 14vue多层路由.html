@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>14vue多层路由</title>
+	<style>
+	/*.v-link-active是自动生成的类名*/
+		.v-link-active{
+			font-size: 20px;
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<ul>
+			<li>
+				<a v-link="{path:'/home'}">主页</a>
+			</li>
+			<li>
+				<a v-link="{path:'/news'}">新闻</a>
+			</li>
+		</ul>
+		<div>
+			<router-view></router-view>
+		</div>
+	</div>
+	<template id="home">
+		<h2>这是主页</h2>
+		<div>
+			<a v-link="{path:'/home/login'}">登录</a>
+			<a v-link="{path:'/home/reg'}">注册</a>
+		</div>
+		<div>
+			<router-view></router-view>
+		</div>
+	</template>
+</body>
+<!-- 注意 vue要写在最前面 -->
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript" src="js/vue-router.js"></script>
+<script type="text/javascript">
+	var App = Vue.extend();
+
+	var Home = Vue.extend({
+		template:'#home'
+	});
+	var News = Vue.extend({
+		template:'<h2>这是新闻也</h2>'
+	});
+
+	var router = new VueRouter();
+
+	router.map({
+		'home':{
+			component:Home,
+			subRoutes:{
+				'login':{
+					component:{
+						template:'<h4>登录登录</h4>'
+					}
+				},
+				'reg':{
+					component:{
+						template:'<h4>注册心心</h4>'
+					}
+				}
+			}
+		},
+		'news':{
+			component:News
+		}
+	});
+
+	router.start(App,'#box');
+
+	router.redirect({
+		'/':'home'
+	});
+</script>
+</html>
